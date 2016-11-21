@@ -18,9 +18,13 @@ int _printf(const char *format, ...)
 		{"d", print_int}
 	};
 	char buffer[1024];
-	int i, chars, j, buflen, k;
+	int i, chars, j, buflen, bufpos;
+	int *buflenptr, *bufposptr;
 
-	i = chars = buflen = k = 0;
+	i = chars = bufpos = 0;
+	buflen = 1;
+	buflenptr = &buflen;
+	bufposptr = &bufpos;
 	va_start(print_this, format);
 	while (format[i] != '\0' && format != NULL)
 	{
@@ -32,21 +36,29 @@ int _printf(const char *format, ...)
 			{
 				if (format[i] == *conversions[j].c)
 				{
-					chars += conversions[j].f(print_this);
+					chars += conversions[j].f(print_this,
+								  buffer,
+								  buflenptr,
+								  bufposptr);
 				}
 				j++;
 			}
 		}
 		else
 		{
-			buffer[k] = format[i];
-			k++;
-			buflen++;
+			buffer[*bufposptr] = format[i];
+			*bufposptr += 1;
+			*buflenptr += 1;
+			if (*buflenptr == 1024)
+			{
+				*bufposptr = 0;
+				write_buffer(buffer, buflenptr);
+			}
 			chars++;
 		}
 		i++;
 	}
-	write(1, buffer, buflen);
+	write_buffer(buffer, buflenptr);
 	va_end(print_this);
 	return (chars);
 }
