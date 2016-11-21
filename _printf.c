@@ -1,7 +1,8 @@
 #include "holberton.h"
 #include <stdarg.h>
 #include <stdlib.h>
-
+#include <unistd.h>
+#include <stdio.h>
 /**
  * _printf - Print out a formatted string
  * @format: Format of the string
@@ -16,9 +17,14 @@ int _printf(const char *format, ...)
 		{"i", print_int},
 		{"d", print_int}
 	};
-	int i, chars, j;
+	char buffer[1024];
+	int i, chars, j, buflen, bufpos;
+	int *buflenptr, *bufposptr;
 
-	i = chars = 0;
+	i = chars = bufpos = 0;
+	buflen = 1;
+	buflenptr = &buflen;
+	bufposptr = &bufpos;
 	va_start(print_this, format);
 	while (format[i] != '\0' && format != NULL)
 	{
@@ -30,18 +36,30 @@ int _printf(const char *format, ...)
 			{
 				if (format[i] == *conversions[j].c)
 				{
-					chars += conversions[j].f(print_this);
+					chars += conversions[j].f(print_this,
+								  buffer,
+								  buflenptr,
+								  bufposptr);
 				}
 				j++;
 			}
 		}
 		else
 		{
-			_putchar(format[i]);
+			buffer[*bufposptr] = format[i];
+			*bufposptr += 1;
+			*buflenptr += 1;
+			if (*buflenptr == 1024)
+			{
+				*bufposptr = 0;
+				write_buffer(buffer, buflenptr);
+			}
 			chars++;
 		}
 		i++;
 	}
+	buffer[*bufposptr] = '\0';
+	write_buffer(buffer, buflenptr);
 	va_end(print_this);
 	return (chars);
 }
