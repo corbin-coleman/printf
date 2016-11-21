@@ -34,10 +34,3 @@ char *binConverter(unsigned int n)
 	bnum[j] = '\0';
 	return (bnum);
 }
-
-int main()
-{
-	char *bin = binConverter(1792);
-	printf("%s\n", bin);
-	return (0);
-}

@@ -15,4 +15,11 @@ int print_c();
 int print_s();
 int print_number(int n);
 int print_int();
+char *binConverter(unsigned int n);
+char *octConverter(unsigned int n);
+char *hexConverter(char type, unsigned int n);
+unsigned int unsignedIntConverter(int n);
+char *print_P(void *ptr);
+void print_S(char *str);
+
 #endif
