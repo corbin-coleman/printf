@@ -1,5 +1,5 @@
 #include "holberton.h"
-#include <stdio.h>
+
 /**
  * print_number - Print the given int one digit at a time
  * @n: The integer to print
@@ -9,8 +9,9 @@
 int print_number(int n)
 {
 	int chars;
+	int sign_print;
 
-	chars = 0;
+	chars = sign_print = 0;
 	if (n == 0)
 	{
 		_putchar('0');
@@ -19,12 +20,17 @@ int print_number(int n)
 	else if (n > 0)
 		n *= -1;
 	else
+	{
 		_putchar('-');
+		sign_print = 1;
+	}
 	if ((n / 10) != 0)
 	{
 		chars = print_number((n / 10) * -1);
 	}
 	_putchar((n % 10) * -1 + '0');
-	chars += 1;
+	if (sign_print > 0)
+		chars += sign_print;
+	chars++;
 	return (chars);
 }
