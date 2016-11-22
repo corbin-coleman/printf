@@ -16,6 +16,7 @@ int _putchar(char c);
 int print_c();
 int print_s();
 int print_number(int n, char buffer[], int *buflen, int *bufpos);
+int print_Unum(unsigned int n, char buffer[], int *buflen, int *bufpos);
 int print_int();
 int print_u();
 char *binConverter(unsigned int n);
@@ -27,7 +28,6 @@ int print_heX();
 int print_b();
 int print_S();
 char *print_P(void *ptr);
-void print_S(char *str);
 void write_buffer(char buffer[], int *buflen);
 void initialize_buffer(char buffer[]);
 

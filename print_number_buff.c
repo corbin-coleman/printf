@@ -55,3 +55,22 @@ int print_number(int n, char buffer[], int *buflen, int *bufpos)
 	chars++;
 	return (chars);
 }
+
+int print_Unum(unsigned int n, char buffer[], int *buflen, int *bufpos)
+{
+	int numChars;
+
+	numChars = 0;
+	if (n == 0)
+	{
+		buffer[*bufpos] = '0';
+		*bufpos += 1;
+		*buflen += 1;
+		if (*buflen == 1024)
+		{
+			*bufpos = 0;
+			write_buffer(buffer, buflen);
+		}
+		return (1);
+	}
+}

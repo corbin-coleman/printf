@@ -1,6 +1,7 @@
 #include "holberton.h"
 #include <stdarg.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
 * print_o - prints the octal conversion of a decimal number
@@ -16,7 +17,7 @@ int print_o(va_list args, char buffer[], int *buflen, int *bufpos)
 	unsigned int n;
 	char *octal;
 
-	n = va_args(args, unsigned int);
+	n = va_arg(args, unsigned int);
 	octal = octConverter(n);
 	if (octal == NULL)
 		octal = "(nil)";
@@ -51,7 +52,7 @@ int print_hex(va_list args, char buffer[], int *buflen, int *bufpos)
 	unsigned int n;
 	char *hex;
 
-	n = va_args(args, unsigned int);
+	n = va_arg(args, unsigned int);
 	hex = hexConverter('x', n);
 	if (hex == NULL)
 		hex = "(nil)";
@@ -85,7 +86,7 @@ int print_heX(va_list args, char buffer[], int *buflen, int *bufpos)
 	unsigned int n;
 	char *heX;
 
-	n = va_args(args, unsigned int);
+	n = va_arg(args, unsigned int);
 	heX = hexConverter('X', n);
 	if (heX == NULL)
 		heX = "(nil)";
@@ -119,7 +120,7 @@ int print_b(va_list args, char buffer[], int *buflen, int *bufpos)
 	unsigned int n;
 	char *bin;
 
-	n = va_args(args, unsigned int);
+	n = va_arg(args, unsigned int);
 	bin = binConverter(n);
 	if (bin == NULL)
 		bin = "(nil)";
@@ -153,17 +154,17 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 	int j;
 	char *str, *inHex;
 
-	str = va_args(args, char *);
+	str = va_arg(args, char *);
 	if (str == NULL)
 		str = "\x00";
 
-	i = 0 = numChars;
+	i = numChars = 0;
 	while (str[i] != '\0')
 	{
 		j = (int)str[i];
 		if (j > 0 && j < 32 || j >= 127)
 		{
-			buffer[*bufpos] = '\x';
+			buffer[*bufpos] = '\\';
 			*bufpos += 1;
 			*buflen += 1;
 			if (*buflen == 1024)
@@ -171,6 +172,14 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 				*bufpos = 0;
 				write_buffer(buffer, buflen);
 			}
+			buffer[*bufpos] = 'x';
+                        *bufpos += 1;
+                        *buflen += 1;
+                        if (*buflen == 1024)
+                        {
+                                *bufpos = 0;
+                                write_buffer(buffer, buflen);
+                        }
 			if (j > 0 && j <= 9)
 			{
 				buffer[*bufpos] = '0';

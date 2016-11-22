@@ -1,7 +1,6 @@
 #include "holberton.h"
 #include <stdarg.h>
 #include <stdlib.h>
-#include <limits.h>
 
 int print_c(va_list args, char buffer[], int *buflen, int *bufpos)
 {
@@ -67,10 +66,9 @@ int print_int(va_list args, char buffer[], int *buflen, int *bufpos)
 int print_u(va_list args, char buffer[], int *buflen, int *bufpos)
 {
 	unsigned int c;
-	int n, chars;
+	int chars;
 
-	n = va_arg(args, int);
-	c = UNIT_MAX + 1 + n;
-	chars = print_number(c, buffer, buflen, bufpos);
+	c = va_arg(args, unsigned int);
+	chars = print_Unum(c, buffer, buflen, bufpos);
 	return (chars);
 }
