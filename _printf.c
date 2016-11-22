@@ -20,9 +20,12 @@ int copy_to_buffer(char formatter, char buffer[],
 
 	chars = 0;
 	buffer[*bufposptr] = formatter;
-	*bufposptr += 1; *buflenptr += 1;
+	*bufposptr += 1;
+	*buflenptr += 1;
 	if (*buflenptr == 1024)
+	{
 		write_buffer(buffer, buflenptr, bufposptr);
+	}
 	chars++;
 	return (chars);
 }
