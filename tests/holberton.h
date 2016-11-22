@@ -13,6 +13,7 @@ int _printf(const char *format, ...);
 int _putchar(char c);
 int print_c();
 int print_s();
-int print_number(int n);
+int print_number(int n, char buffer[], int *buflen, int *bufpos);
 int print_int();
+void write_buffer(char buffer[], int *buflen);
 #endif
