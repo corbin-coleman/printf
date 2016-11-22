@@ -94,7 +94,7 @@ int _printf(const char *format, ...)
 
 	init_struct(conversions);
 	initialize_buffer(buffer);
-	i = chars = bufpos = 0;
+	i = chars = bufpos = mods = 0;
 	buflen = 1;
 	buflenptr = &buflen;
 	bufposptr = &bufpos;
