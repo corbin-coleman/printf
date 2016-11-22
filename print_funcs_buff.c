@@ -61,19 +61,6 @@ int print_s(va_list args, char buffer[], int *buflen, int *bufpos)
 		i++;
 		chars++;
 	}
-	if (str == '\0')
-	{
-		buffer[*bufpos] = '\0';
-		*bufpos += 1;
-		*buflen += 1;
-		if (*buflen == 1024)
-			write_buffer(buffer, buflen, bufpos);
-		chars++;
-	}
-	else
-	{
-		return (-1);
-	}
 	return (chars);
 }
 
