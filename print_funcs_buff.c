@@ -6,7 +6,7 @@
  * print_c - Copy a character into the buffer & print if buffer is full
  * @args: Va_list of all given arguments to _printf
  * @buffer: The buffer being copied to to print
- * @buflen: The current length of the buffer, aka number of characters in buffer
+ * @buflen: The current length of the buffer aka number of characters in buffer
  * @bufpos: Current position, or index, inside the buffer
  *
  * Return: Returns number of characters copied to buffer, allows for _printf to
@@ -36,7 +36,7 @@ int print_c(va_list args, char buffer[], int *buflen, int *bufpos)
  * print_s - Copy a string into the buffer & print if buffer is full
  * @args: Va_list of all given arguments to _printf
  * @buffer: The buffer being copied to to print
- * @buflen: The current length of the buffer, aka number of characters in buffer
+ * @buflen: The current length of the buffer aka number of characters in buffer
  * @bufpos: Current position, or index, inside the buffer
  *
  * Return: Returns number of characters copied to buffer, allows for _printf to
@@ -68,7 +68,7 @@ int print_s(va_list args, char buffer[], int *buflen, int *bufpos)
  * print_int - Call the function to copy a number to the buffer
  * @args: Va_list of all given arguments to _printf
  * @buffer: The buffer being copied to to print
- * @buflen: The current length of the buffer, aka number of characters in buffer
+ * @buflen: The current length of the buffer aka number of characters in buffer
  * @bufpos: Current position, or index, inside the buffer
  *
  * Return: Returns number of characters copied to buffer, allows for _printf to
