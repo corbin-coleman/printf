@@ -10,7 +10,7 @@ void print_S(char *str)
 {
 	int i;
 	unsigned int j;
-	char *inHex, smallHex[2];
+	char *inHex, smallHex[2], *esp;
 
 	if (str == NULL)
 	{
@@ -21,6 +21,7 @@ void print_S(char *str)
 	printf("%s\n", smallHex);
 	return;
 
+	esp = "\x";
 	for (i = 0; str[i] != '\0'; i++)
 	{
 		j = (int)str[i];
