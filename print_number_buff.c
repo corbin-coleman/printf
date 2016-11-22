@@ -1,8 +1,11 @@
 #include "holberton.h"
 
 /**
- * print_number - Print the given int one digit at a time
+ * print_number - Copy the given int one digit at a time to the buffer to print
  * @n: The integer to print
+ * @buffer: Buffer beign copied to to print
+ * @buflen: Length of the buffer, aka number of characters in buffer
+ * @bufpos: Position in the buffer
  *
  * Return: Number of characters printed
  */
@@ -18,10 +21,7 @@ int print_number(int n, char buffer[], int *buflen, int *bufpos)
 		*bufpos += 1;
 		*buflen += 1;
 		if (*buflen == 1024)
-		{
-			*bufpos = 0;
-			write_buffer(buffer, buflen);
-		}
+			write_buffer(buffer, buflen, bufpos);
 		return (1);
 	}
 	else if (n > 0)
@@ -30,12 +30,9 @@ int print_number(int n, char buffer[], int *buflen, int *bufpos)
 	{
 		buffer[*bufpos] = '-';
 		*bufpos += 1;
-		*buflen += 1 ;
+		*buflen += 1;
 		if (*buflen == 1024)
-		{
-			*bufpos = 0;
-			write_buffer(buffer, buflen);
-		}
+			write_buffer(buffer, buflen, bufpos);
 		sign_print = 1;
 	}
 	if ((n / 10) != 0)
@@ -46,10 +43,7 @@ int print_number(int n, char buffer[], int *buflen, int *bufpos)
 	*bufpos += 1;
 	*buflen += 1;
 	if (*buflen == 1024)
-	{
-		*bufpos = 0;
-		write_buffer(buffer, buflen);
-	}
+		write_buffer(buffer, buflen, bufpos);
 	if (sign_print > 0)
 		chars += sign_print;
 	chars++;
