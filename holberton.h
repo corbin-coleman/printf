@@ -31,5 +31,4 @@ int print_S();
 int print_r();
 int print_R();
 char *print_P(void *ptr);
-
 #endif
