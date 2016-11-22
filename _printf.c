@@ -114,8 +114,6 @@ int _printf(const char *format, ...)
 				chars += copy_to_buffer(format[i], buffer,
 							buflenptr, bufposptr);
 			}
-			if (print < 0)
-				print = 0;
 			chars += print;
 		}
 		else
