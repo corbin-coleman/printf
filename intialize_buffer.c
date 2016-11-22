@@ -12,7 +12,8 @@ void initialize_buffer(char buffer[])
 	i = 0;
 	while (i < 1024)
 	{
-		buffer[i] = '\0';
+		buffer[i] = 0;
 		i++;
 	}
+	buffer[i] = '\0';
 }
