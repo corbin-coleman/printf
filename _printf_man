@@ -1,0 +1,22 @@
+.TH _printf 1 "21 Nov 2016" "version 1.0" "_printf man page"
+.SH NAME
+.B _printf
+- custom printf function for printing on standard output
+.SH SYNOPSIS
+.SH #include "holberton.h"
+.SH #include <stdio.h>
+.SH #include <stdarg.h>
+.SH DESCRIPTION
+Our Custom printf function that takes variable arguements and prints outs at standard output, based on specifed formatter.
+.SH Return
+Upon successful return, these functions return the number of characters printed (excluding the null byte used to end output to strings).
+.SH OPTIONS
+we are mot accepting flags at this point.
+.B holberton
+does not take any options. However, you can supply studentname.
+.SH SEE ALSO
+.I Nothing else
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Corbin Coleman & Swati Gupta
