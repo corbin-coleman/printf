@@ -17,9 +17,3 @@ void *print_P(void *ptr)
 		i++;
 	}
 }
-void main()
-{
-	int i = 1;
-	print_P(&i);
-/* printf("%s\n", s); */
-}

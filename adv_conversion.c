@@ -150,8 +150,8 @@ int print_b(va_list args, char buffer[], int *buflen, int *bufpos)
 **/
 int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 {
-	int numChars, i;
-	int j;
+	int numChars, i, k;
+	unsigned j;
 	char *str, *inHex;
 
 	str = va_arg(args, char *);
@@ -161,7 +161,7 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 	i = numChars = 0;
 	while (str[i] != '\0')
 	{
-		j = (int)str[i];
+		j = str[i];
 		if (j > 0 && j < 32 || j >= 127)
 		{
 			buffer[*bufpos] = '\\';
@@ -180,7 +180,7 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
                                 *bufpos = 0;
                                 write_buffer(buffer, buflen);
                         }
-			if (j > 0 && j <= 9)
+			if (j > 0 && j <= 15)
 			{
 				buffer[*bufpos] = '0';
 				*bufpos += 1;
@@ -190,7 +190,10 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 					*bufpos = 0;
 					write_buffer(buffer, buflen);
 				}
-				buffer[*bufpos] = str[i] + '0';
+				if (j > 0 && j <= 9)
+					buffer[*bufpos] = str[i] + '0';
+				else if (j > 9 && j <= 15)
+					buffer[*bufpos] = str[i] + 55;
 				*bufpos += 1;
                                 *buflen += 1;
 				if (*buflen == 1024)
@@ -199,13 +202,13 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 					write_buffer(buffer, buflen);
 				}
 			}
-			else if (j > 9 && j < 32 || j >= 127)
+			else if (j > 16 && j < 32 || j >= 127)
 			{
-				j = 0;
-				inHex = hexConverter('X', (unsigned int)j);
-				while (inHex[j] != '\0')
+				inHex = hexConverter('X', j);
+				k = 0;
+				while (inHex[k] != '\0')
 				{
-					buffer[*bufpos] = inHex[j];
+					buffer[*bufpos] = inHex[k];
 					*bufpos += 1;
 					*buflen += 1;
 					if (*buflen == 1024)
@@ -213,10 +216,10 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 						*bufpos = 0;
 						write_buffer(buffer, buflen);
 					}
-					j++;
+					k++;
 				}
 			}
-			numChars += 3;
+			numChars += 4;
 		}
 	 	else
 		{
