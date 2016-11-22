@@ -73,4 +73,16 @@ int print_Unum(unsigned int n, char buffer[], int *buflen, int *bufpos)
 		}
 		return (1);
 	}
+	if ((n / 10) != 0)
+		numChars = print_Unum((n / 10), buffer, buflen, bufpos);
+	buffer[*bufpos] = (n % 10) + '0';
+	*bufpos += 1;
+	*buflen += 1;
+	if (*buflen == 1024)
+	{
+		*bufpos = 0;
+		write_buffer(buffer, buflen);
+	}
+	numChars++;
+	return (numChars);
 }

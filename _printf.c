@@ -20,18 +20,18 @@ void init_struct(char_funcs_t conversions[])
 	conversions[2].f = print_int;
 	conversions[3].c = "d";
 	conversions[3].f = print_int;
-	conversions[3].c = "u";
-        conversions[3].f = print_u;
-	conversions[3].c = "o";
-        conversions[3].f = print_o;
-	conversions[3].c = "x";
-        conversions[3].f = print_hex;
-	conversions[3].c = "X";
-        conversions[3].f = print_heX;
-	conversions[3].c = "b";
-        conversions[3].f = print_b;
-	conversions[3].c = "S";
-        conversions[3].f = print_S;
+	conversions[4].c = "u";
+        conversions[4].f = print_u;
+	conversions[5].c = "o";
+        conversions[5].f = print_o;
+	conversions[6].c = "x";
+        conversions[6].f = print_hex;
+	conversions[7].c = "X";
+        conversions[7].f = print_heX;
+	conversions[8].c = "b";
+        conversions[8].f = print_b;
+	conversions[9].c = "S";
+        conversions[9].f = print_S;
 }
 
 /**
@@ -42,7 +42,7 @@ void init_struct(char_funcs_t conversions[])
 int _printf(const char *format, ...)
 {
 	va_list print_this;
-	char_funcs_t conversions[4];
+	char_funcs_t conversions[10];
 	char buffer[1024];
 	int i, chars, j, buflen, bufpos, *buflenptr, *bufposptr;
 
@@ -56,7 +56,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			for (j = 0; j < 4; j++)
+			for (j = 0; j < 10; j++)
 			{
 				if (format[i] == *conversions[j].c)
 				{
