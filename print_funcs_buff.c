@@ -1,6 +1,7 @@
 #include "holberton.h"
 #include <stdarg.h>
 #include <stdlib.h>
+#include <limits.h>
 
 int print_c(va_list args, char buffer[], int *buflen, int *bufpos)
 {
@@ -52,5 +53,24 @@ int print_int(va_list args, char buffer[], int *buflen, int *bufpos)
 
 	n = va_arg(args, int);
 	chars = print_number(n, buffer, buflen, bufpos);
+	return (chars);
+}
+
+/**
+* print_u - prints the unsigned int
+* @args: number to be printed
+* @buffer: space used for printing
+* @buflen: buffer length
+* @bufpos: current buffer index
+* Return: numbers of chars written to buffer
+**/
+int print_u(va_list args, char buffer[], int *buflen, int *bufpos)
+{
+	unsigned int c;
+	int n, chars;
+
+	n = va_arg(args, int);
+	c = UNIT_MAX + 1 + n;
+	chars = print_number(c, buffer, buflen, bufpos);
 	return (chars);
 }

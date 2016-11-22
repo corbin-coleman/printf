@@ -20,6 +20,18 @@ void init_struct(char_funcs_t conversions[])
 	conversions[2].f = print_int;
 	conversions[3].c = "d";
 	conversions[3].f = print_int;
+	conversions[3].c = "u";
+        conversions[3].f = print_u;
+	conversions[3].c = "o";
+        conversions[3].f = print_o;
+	conversions[3].c = "x";
+        conversions[3].f = print_hex;
+	conversions[3].c = "X";
+        conversions[3].f = print_heX;
+	conversions[3].c = "b";
+        conversions[3].f = print_b;
+	conversions[3].c = "S";
+        conversions[3].f = print_S;
 }
 
 /**
