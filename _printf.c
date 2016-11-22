@@ -3,6 +3,25 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+
+/**
+ * init_struct - Initialize all the struct values
+ * @conversions: The struct to intialize to proper values
+ * Description: Largely created to overcome function line limit
+ */
+void init_struct(char_funcs_t conversions[])
+{
+
+	conversions[0].c = "c";
+	conversions[0].f = print_c;
+	conversions[1].c = "s";
+	conversions[1].f = print_s;
+	conversions[2].c = "i";
+	conversions[2].f = print_int;
+	conversions[3].c = "d";
+	conversions[3].f = print_int;
+}
+
 /**
  * _printf - Print out a formatted string
  * @format: Format of the string
@@ -11,28 +30,21 @@
 int _printf(const char *format, ...)
 {
 	va_list print_this;
-	char_funcs_t conversions[] = {
-		{"c", print_c},
-		{"s", print_s},
-		{"i", print_int},
-		{"d", print_int}
-	};
+	char_funcs_t conversions[4];
 	char buffer[1024];
-	int i, chars, j, buflen, bufpos;
-	int *buflenptr, *bufposptr;
+	int i, chars, j, buflen, bufpos, *buflenptr, *bufposptr;
 
+	init_struct(conversions);
+	initialize_buffer(buffer);
 	i = chars = bufpos = 0;
-	buflen = 1;
-	buflenptr = &buflen;
-	bufposptr = &bufpos;
+	buflen = 1; buflenptr = &buflen; bufposptr = &bufpos;
 	va_start(print_this, format);
-	while (format[i] != '\0' && format != NULL)
+	for (i = 0; format[i] != '\0' && format != NULL; i++)
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			j = 0;
-			while (j < 4)
+			for (j = 0; j < 4; j++)
 			{
 				if (format[i] == *conversions[j].c)
 				{
@@ -41,24 +53,17 @@ int _printf(const char *format, ...)
 								  buflenptr,
 								  bufposptr);
 				}
-				j++;
 			}
 		}
 		else
 		{
 			buffer[*bufposptr] = format[i];
-			*bufposptr += 1;
-			*buflenptr += 1;
+			*bufposptr += 1; *buflenptr += 1;
 			if (*buflenptr == 1024)
-			{
-				*bufposptr = 0;
 				write_buffer(buffer, buflenptr);
-			}
 			chars++;
 		}
-		i++;
 	}
-	buffer[*bufposptr] = '\0';
 	write_buffer(buffer, buflenptr);
 	va_end(print_this);
 	return (chars);

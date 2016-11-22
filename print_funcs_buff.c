@@ -12,7 +12,6 @@ int print_c(va_list args, char buffer[], int *buflen, int *bufpos)
 	}
 	else
 	{
-		*bufpos = 0;
 		write_buffer(buffer, buflen);
 		buffer[*bufpos] = va_arg(args, int);
 		*bufpos += 1;
