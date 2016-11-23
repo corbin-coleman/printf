@@ -73,39 +73,44 @@ char *hexConverter(char type, unsigned int n)
 	hexN[j] = '\0';
 	return (hexN);
 }
-
+/**
+* size_tHex - converts decimal number greater than 9 to hex
+* @type: char for uppercase or lowercase letter conversion
+* @n: based on size of a number it gets converetd in hex
+* Return: pointer to a char
+**/
 char *size_tHex(char type, size_t n)
 {
-        char *hexN, hexn[1024];
-        int i, j;
+	char *hexN, hexn[1024];
+	int i, j;
 	long remn;
 
-        i = 0;
-        while (n != 0)
-        {
-                remn = n % 16;
-                if (remn > 9)
-                {
-                        if (type == 'X')
-                                hexn[i] = remn + 55;
-                        else
-                                hexn[i] = remn + 87;
-                }
-                else
-                        hexn[i] = remn + 48;
-                n /= 16;
-                i++;
-        }
-        hexn[i] = '\0';
+	i = 0;
+	while (n != 0)
+	{
+		remn = n % 16;
+		if (remn > 9)
+		{
+			if (type == 'X')
+				hexn[i] = remn + 55;
+			else
+				hexn[i] = remn + 87;
+		}
+		else
+			hexn[i] = remn + 48;
+		n /= 16;
+		i++;
+	}
+	hexn[i] = '\0';
 
-        hexN = malloc(sizeof(char *) * i);
-        if (hexN == NULL)
-                return (NULL);
-        i--;
-        for (j = 0; i >= 0; j++, i--)
-                hexN[j] = hexn[i];
-        hexN[j] = '\0';
-        return (hexN);
+	hexN = malloc(sizeof(char *) * i);
+	if (hexN == NULL)
+		return (NULL);
+	i--;
+	for (j = 0; i >= 0; j++, i--)
+		hexN[j] = hexn[i];
+	hexN[j] = '\0';
+	return (hexN);
 }
 
 /**
