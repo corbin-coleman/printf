@@ -3,15 +3,12 @@
 
 int main(void)
 {
-	char c = 'a';
+	/*char c = 'a';
 	char *str = "Bye";
-	int i;
+	int i;*/
 
-        _printf("Hello bob\n%c\n%s\n%s\n%i\n%d\n", c, "bye", str, 10, 2000);
-	i = _printf("%s%d%i%c\n", "BOB ", 22, -98, 'p');
-	_printf("char count = %d\n", i);
-	i = printf("%s%d%i%c\n", "BOB ", 22, -98, 'p');
-	_printf("char count = %d\n", i);
-	_printf("Hello\n");
+	/* _printf("%u\n%o\n%x\n%X\n%b\n%S\n%r\n%R\n", -98, 109, 312, 445, 801,
+	   "\x31", "abcde", "abnoz");*/
+	printf("%z;dkeoedkfje\n");
 	return (0);
 }

@@ -83,3 +83,21 @@ int print_int(va_list args, char buffer[], int *buflen, int *bufpos)
 	chars = print_number(n, buffer, buflen, bufpos);
 	return (chars);
 }
+
+/**
+* print_u - prints the unsigned int
+* @args: number to be printed
+* @buffer: space used for printing
+* @buflen: buffer length
+* @bufpos: current buffer index
+* Return: numbers of chars written to buffer
+**/
+int print_u(va_list args, char buffer[], int *buflen, int *bufpos)
+{
+	unsigned int c;
+	int chars;
+
+	c = va_arg(args, unsigned int);
+	chars = print_Unum(c, buffer, buflen, bufpos);
+	return (chars);
+}

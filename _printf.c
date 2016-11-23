@@ -51,7 +51,7 @@ int check_conversion(char formatter, char_funcs_t conversions[], char buffer[],
 	int j, chars;
 
 	chars = 0;
-	for (j = 0; j < 4; j++)
+	for (j = 0; j < 12; j++)
 	{
 		if (formatter == *conversions[j].c)
 		{
@@ -78,6 +78,22 @@ void init_struct(char_funcs_t conversions[])
 	conversions[2].f = print_int;
 	conversions[3].c = "d";
 	conversions[3].f = print_int;
+	conversions[4].c = "u";
+	conversions[4].f = print_u;
+	conversions[5].c = "o";
+	conversions[5].f = print_o;
+	conversions[6].c = "x";
+	conversions[6].f = print_hex;
+	conversions[7].c = "X";
+	conversions[7].f = print_heX;
+	conversions[8].c = "b";
+	conversions[8].f = print_b;
+	conversions[9].c = "S";
+	conversions[9].f = print_S;
+	conversions[10].c = "r";
+	conversions[10].f = print_r;
+	conversions[11].c = "R";
+	conversions[11].f = print_R;
 }
 
 /**
@@ -88,7 +104,7 @@ void init_struct(char_funcs_t conversions[])
 int _printf(const char *format, ...)
 {
 	va_list print_this;
-	char_funcs_t conversions[4];
+	char_funcs_t conversions[12];
 	char buffer[1024];
 	int i, chars, buflen, bufpos, *buflenptr, *bufposptr, print;
 
@@ -110,10 +126,8 @@ int _printf(const char *format, ...)
 						  buffer, buflenptr, bufposptr,
 						  print_this);
 			if (print == 0)
-			{
 				chars += copy_to_buffer(format[i], buffer,
 							buflenptr, bufposptr);
-			}
 			chars += print;
 		}
 		else

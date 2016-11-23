@@ -49,3 +49,37 @@ int print_number(int n, char buffer[], int *buflen, int *bufpos)
 	chars++;
 	return (chars);
 }
+
+/**
+ * print_Unum - Copy the given unsigned integer to the buffer to print
+ * @n: Integer to copy
+ * @buffer: Buffer to copy to
+ * @buflen: Current length of buffer, # of characters in buffer
+ * @bufpos: Current position in the buffer
+ *
+ * Return: Number of characters printed
+ */
+int print_Unum(unsigned int n, char buffer[], int *buflen, int *bufpos)
+{
+	int numChars;
+
+	numChars = 0;
+	if (n == 0)
+	{
+		buffer[*bufpos] = '0';
+		*bufpos += 1;
+		*buflen += 1;
+		if (*buflen == 1024)
+			write_buffer(buffer, buflen, bufpos);
+		return (1);
+	}
+	if ((n / 10) != 0)
+		numChars = print_Unum((n / 10), buffer, buflen, bufpos);
+	buffer[*bufpos] = (n % 10) + '0';
+	*bufpos += 1;
+	*buflen += 1;
+	if (*buflen == 1024)
+		write_buffer(buffer, buflen, bufpos);
+	numChars++;
+	return (numChars);
+}
