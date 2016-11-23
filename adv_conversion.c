@@ -151,7 +151,7 @@ int print_b(va_list args, char buffer[], int *buflen, int *bufpos)
 int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 {
 	int numChars, i, k;
-	unsigned j;
+	int j;
 	char *str, *inHex;
 
 	str = va_arg(args, char *);
@@ -162,6 +162,7 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 	while (str[i] != '\0')
 	{
 		j = str[i];
+		printf("j is %d\n", j);
 		if (j > 0 && j < 32 || j >= 127)
 		{
 			buffer[*bufpos] = '\\';
