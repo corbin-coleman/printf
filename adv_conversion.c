@@ -150,8 +150,30 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 	char *str, *inHex;
 
 	str = va_arg(args, char *);
-	if (str == NULL)
-		str = "\x00";
+	if (str == NULL || *str == '\0')
+	{
+		buffer[*bufpos] = '\\';
+		*bufpos += 1;
+		*buflen += 1;
+		if (*buflen == 1024)
+			write_buffer(buffer, buflen, bufpos);
+		buffer[*bufpos] = 'x';
+		*bufpos += 1;
+		*buflen += 1;
+		if (*buflen == 1024)
+                        write_buffer(buffer, buflen, bufpos);
+		buffer[*bufpos] = '0';
+		*bufpos += 1;
+		*buflen += 1;
+		if (*buflen == 1024)
+                        write_buffer(buffer, buflen, bufpos);
+		buffer[*bufpos] = '0';
+		*bufpos += 1;
+		*buflen += 1;
+		if (*buflen == 1024)
+                        write_buffer(buffer, buflen, bufpos);
+		return(4);
+	}
 	i = numChars = 0;
 	while (str[i] != '\0')
 	{
