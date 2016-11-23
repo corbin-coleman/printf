@@ -150,9 +150,8 @@ int print_b(va_list args, char buffer[], int *buflen, int *bufpos)
 **/
 int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 {
-	int numChars, i, k;
-	int j;
-	char *str, *inHex;
+	int numChars, i, k, j;
+	char *str, *inHex, st;
 
 	str = va_arg(args, char *);
 	if (str == NULL)
@@ -161,7 +160,9 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 	i = numChars = 0;
 	while (str[i] != '\0')
 	{
+		st = str[i];
 		j = str[i];
+		printf("st is %c\n", st);
 		printf("j is %d\n", j);
 		if (j > 0 && j < 32 || j >= 127)
 		{
