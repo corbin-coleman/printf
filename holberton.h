@@ -1,6 +1,7 @@
 #ifndef HOLBERTON
 #define HOLBERTON
 #include <stdarg.h>
+#include <stdlib.h>
 /**
  * struct char_funcs - Struct to find function based on char
  * @c: char to check as key
@@ -22,6 +23,7 @@ int print_int(va_list args, char buffer[], int *buflen, int *bufpos);
 char *binConverter(unsigned int n);
 char *octConverter(unsigned int n);
 char *hexConverter(char type, unsigned int n);
+char *size_tHex(char type, size_t n);
 int print_Unum(unsigned int n, char buffer[], int *buflen, int *bufpos);
 int print_u(va_list args, char buffer[], int *buflen, int *bufpos);
 int print_o(va_list args, char buffer[], int *buflen, int *bufpos);

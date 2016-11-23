@@ -80,10 +80,10 @@ int print_p(va_list args, char buffer[], int *buflen, int *bufpos)
 {
 	char *str;
 	int i, numChars;
-	unsigned long add;
+	size_t add;
 
-	add = (unsigned long)va_arg(args, void *);
-	str = hexConverter('x', add);
+	add = (size_t)va_arg(args, void *);
+	str = size_tHex('x', add);
 	if (str == NULL)
 		return (0);
 	i = numChars = 0;
