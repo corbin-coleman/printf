@@ -98,7 +98,7 @@ int print_p(va_list args, char buffer[], int *buflen, int *bufpos)
 	*bufpos += 1;
 	*buflen += 1;
 	if (*buflen == 1024)
-		write_buffer(buffer, buflen, bufpos);
+	write_buffer(buffer, buflen, bufpos);
 	while (str[i] != '\0')
 	{
 		buffer[*bufpos] = str[i];

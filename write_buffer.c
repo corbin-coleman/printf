@@ -11,6 +11,5 @@ void write_buffer(char buffer[], int *buflen, int *bufpos)
 {
 	write(1, buffer, *buflen - 1);
 	*bufpos = 0;
-	initialize_buffer(buffer);
 	*buflen = 1;
 }

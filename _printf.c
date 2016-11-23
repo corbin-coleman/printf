@@ -4,15 +4,15 @@
 #include <unistd.h>
 
 /**
- * copy_to_buffer - Copies the given character over to the buffer
- * @formatter: Character to copy over
- * @buffer: Buffer being copied to
- * @buflenptr: Pointer to the length of the buffer, the number of
- * characters in the buffer
- * @bufposptr: Pointer to the position in the buffer
- *
- * Return: Number of characters copied to buffer;
- */
+* copy_to_buffer - Copies the given character over to the buffer
+* @formatter: Character to copy over
+* @buffer: Buffer being copied to
+* @buflenptr: Pointer to the length of the buffer, the number of
+* characters in the buffer
+* @bufposptr: Pointer to the position in the buffer
+*
+* Return: Number of characters copied to buffer
+*/
 int copy_to_buffer(char formatter, char buffer[],
 		     int *buflenptr, int *bufposptr)
 {
@@ -32,19 +32,19 @@ int copy_to_buffer(char formatter, char buffer[],
 
 
 /**
- * check_conversion - Checks formatter character to see if
- * it's a conversion specifier
- * @formatter: The format character being checked
- * @conversions: Struct holding conversion specifiers & function pointers to
- * appropriate functions for corresponding conversion specifier
- * @buffer: Buffer needed to copy to when calling function
- * @buflenptr: Pointer to the length of the buffer
- * @bufposptr: Pointer to the position within the buffer
- * @print_this: va_list holding all given arguments to _printf function
- *
- * Return: Return the number of characters copied to buffer if a
- * function is called, 0 if no function is called
- */
+* check_conversion - Checks formatter character to see if
+* it's a conversion specifier
+* @formatter: The format character being checked
+* @conversions: Struct holding conversion specifiers & function pointers to
+* @appropriate functions for corresponding conversion specifier
+* @buffer: Buffer needed to copy to when calling function
+* @buflenptr: Pointer to the length of the buffer
+* @bufposptr: Pointer to the position within the buffer
+* @print_this: va_list holding all given arguments to _printf function
+*
+* Return: Return the number of characters copied to buffer if a
+* function is called, 0 if no function is called
+*/
 int check_conversion(char formatter, char_funcs_t conversions[], char buffer[],
 		     int *buflenptr, int *bufposptr, va_list print_this)
 {
@@ -62,71 +62,33 @@ int check_conversion(char formatter, char_funcs_t conversions[], char buffer[],
 	}
 	return (0);
 }
-
 /**
- * init_struct - Initialize all the struct values
- * @conversions: The struct to intialize to proper values
- * Description: Largely created to overcome function line limit
- */
-void init_struct(char_funcs_t conversions[])
+* formatPrinter - finds the formatters function and prints its arguement
+* @format: The format character being checked
+* @conversions: Struct holding conversion specifiers & function pointers to
+* appropriate functions for corresponding conversion specifier
+* @buffer: Buffer needed to copy to when calling function
+* @buflenptr: Pointer to the length of the buffer
+* @bufposptr: Pointer to the position within the buffer
+* @print_this: va_list holding all given arguments to _printf function
+*
+* Return: Return the number of characters copied to buffer if a
+* function is called, 0 if no function is called
+*/
+int formatPrinter(const char *format, va_list print_this, char buffer[],
+		  int *buflenptr, int *bufposptr, char_funcs_t conversions[])
 {
-	conversions[0].c = "c";
-	conversions[0].f = print_c;
-	conversions[1].c = "s";
-	conversions[1].f = print_s;
-	conversions[2].c = "i";
-	conversions[2].f = print_int;
-	conversions[3].c = "d";
-	conversions[3].f = print_int;
-	conversions[4].c = "u";
-	conversions[4].f = print_u;
-	conversions[5].c = "o";
-	conversions[5].f = print_o;
-	conversions[6].c = "x";
-	conversions[6].f = print_hex;
-	conversions[7].c = "X";
-	conversions[7].f = print_heX;
-	conversions[8].c = "b";
-	conversions[8].f = print_b;
-	conversions[9].c = "S";
-	conversions[9].f = print_S;
-	conversions[10].c = "r";
-	conversions[10].f = print_r;
-	conversions[11].c = "R";
-	conversions[11].f = print_R;
-	conversions[12].c = "p";
-	conversions[12].f = print_p;
-}
+	int i, chars, print;
 
-/**
- * _printf - Print out a formatted string
- * @format: Format of the string
- * Return: Number of characters printed
- */
-int _printf(const char *format, ...)
-{
-	va_list print_this;
-	char_funcs_t conversions[13];
-	char buffer[1024];
-	int i, chars, buflen, bufpos, *buflenptr, *bufposptr, print;
-
-	init_struct(conversions);
-	initialize_buffer(buffer);
-	i = chars = bufpos = 0;
-	buflen = 1;
-	buflenptr = &buflen;
-	bufposptr = &bufpos;
-	va_start(print_this, format);
-	if (format == NULL || print_this == NULL)
-		return (chars);
+	chars = 0;
 	for (i = 0; format[i] != '\0' && format != NULL; i++)
 	{
 		if (format[i] == '%')
 		{
 			i++;
 			print = check_conversion(format[i], conversions,
-						  buffer, buflenptr, bufposptr,
-						  print_this);
+						 buffer, buflenptr, bufposptr,
+						 print_this);
 			if (print == 0)
 				chars += copy_to_buffer(format[i], buffer,
 							buflenptr, bufposptr);
@@ -138,6 +100,44 @@ int _printf(const char *format, ...)
 						bufposptr);
 		}
 	}
+	return (chars);
+}
+
+/**
+* _printf - Print out a formatted string
+* @format: Format of the string
+* Return: Number of characters printed
+*/
+int _printf(const char *format, ...)
+{
+	va_list print_this;
+	char buffer[1024];
+	int i, chars, buflen, bufpos, *buflenptr, *bufposptr;
+	char_funcs_t conversions[] = {{"c", print_c},
+				      {"s", print_s},
+				      {"i", print_int},
+				      {"d", print_int},
+				      {"u", print_u},
+				      {"o", print_o},
+				      {"x", print_hex},
+				      {"X", print_heX},
+				      {"b", print_b},
+				      {"S", print_S},
+				      {"r", print_r},
+				      {"R", print_R},
+				      {"p", print_p},
+	};
+
+	initialize_buffer(buffer);
+	i = chars = bufpos = 0;
+	buflen = 1;
+	buflenptr = &buflen;
+	bufposptr = &bufpos;
+	va_start(print_this, format);
+	if (format == NULL || print_this == NULL)
+		return (chars);
+	chars = formatPrinter(format, print_this, buffer,
+			      buflenptr, bufposptr, conversions);
 	write_buffer(buffer, buflenptr, bufposptr);
 	va_end(print_this);
 	return (chars);

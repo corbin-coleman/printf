@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <limits.h>
 /**
-* octConverter - Converts a decimal number greater than 7 to octal
+* octConverter - represents a decimal number greater than 7 to octal
 * @n: number to be converted
 * Return: pointer to a char
 **/
@@ -21,7 +21,7 @@ char *octConverter(unsigned int n)
 	}
 	num[i] = '\0';
 
-	nums = malloc(sizeof(char *) * i);
+	nums = malloc(sizeof(char) * i);
 	if (nums == NULL)
 		return (NULL);
 	i--;
@@ -36,7 +36,7 @@ char *octConverter(unsigned int n)
 }
 
 /**
-* hexConverter - converts decimal number greater than 9 to hex
+* hexConverter - represents decimal number greater than 9 to hex
 * @type: char for uppercase or lowercase letter conversion
 * @n: number to be converted
 * Return: pointer to a char
@@ -64,7 +64,7 @@ char *hexConverter(char type, unsigned int n)
 	}
 	hexn[i] = '\0';
 
-	hexN = malloc(sizeof(char *) * i);
+	hexN = malloc(sizeof(char) * i);
 	if (hexN == NULL)
 		return (NULL);
 	i--;
@@ -74,7 +74,7 @@ char *hexConverter(char type, unsigned int n)
 	return (hexN);
 }
 /**
-* size_tHex - converts decimal number greater than 9 to hex
+* size_tHex - represents decimal number greater than 9 to hex
 * @type: char for uppercase or lowercase letter conversion
 * @n: based on size of a number it gets converetd in hex
 * Return: pointer to a char
@@ -103,7 +103,7 @@ char *size_tHex(char type, size_t n)
 	}
 	hexn[i] = '\0';
 
-	hexN = malloc(sizeof(char *) * i);
+	hexN = malloc(sizeof(char) * i);
 	if (hexN == NULL)
 		return (NULL);
 	i--;
@@ -114,7 +114,7 @@ char *size_tHex(char type, size_t n)
 }
 
 /**
-* unsignedIntConverter - converts a signed number into unsigned
+* unsignedIntConverter - represents a signed number into unsigned
 * @n: number to be converted
 * Return: an unsigned int
 **/

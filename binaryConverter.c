@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
-* binConverter - converts an unsigned int to binary
+* binConverter - represents an unsigned int to binary
 * @n: unsigned int to be converted
 * Return: pointer to char
 **/
@@ -20,7 +20,7 @@ char *binConverter(unsigned int n)
 	}
 	bNum[i] = '\0';
 
-	bnum = malloc(sizeof(char *) * i);
+	bnum = malloc(sizeof(char) * i);
 	if (bnum == NULL)
 		return (NULL);
 
