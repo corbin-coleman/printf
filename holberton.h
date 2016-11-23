@@ -31,4 +31,5 @@ int print_b(va_list args, char buffer[], int *buflen, int *bufpos);
 int print_S(va_list args, char buffer[], int *buflen, int *bufpos);
 int print_r(va_list args, char buffer[], int *buflen, int *bufpos);
 int print_R(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_p(va_list args, char buffer[], int *buflen, int *bufpos);
 #endif

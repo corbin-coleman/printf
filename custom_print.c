@@ -68,3 +68,46 @@ int print_R(va_list args, char buffer[], int *buflen, int *bufpos)
 	}
 	return (numChars);
 }
+/**
+* print_p - prints the address of a variable
+* @args: number to be printed
+* @buffer: space used for printing
+* @buflen: buffer length
+* @bufpos: current buffer index
+* Return: numbers of chars written to buffer
+**/
+int print_p(va_list args, char buffer[], int *buflen, int *bufpos)
+{
+	char *str;
+	int i, numChars;
+	unsigned long add;
+
+	add = (unsigned long)va_arg(args, void *);
+	str = hexConverter('x', add);
+	if (str == NULL)
+		return (0);
+	i = numChars = 0;
+	buffer[*bufpos] = '0';
+	numChars++;
+	*bufpos += 1;
+	*buflen += 1;
+	if (*buflen == 1024)
+		write_buffer(buffer, buflen, bufpos);
+	buffer[*bufpos] = 'x';
+	numChars++;
+	*bufpos += 1;
+	*buflen += 1;
+	if (*buflen == 1024)
+		write_buffer(buffer, buflen, bufpos);
+	while (str[i] != '\0')
+	{
+		buffer[*bufpos] = str[i];
+		*bufpos += 1;
+		*buflen += 1;
+		if (*buflen == 1024)
+			write_buffer(buffer, buflen, bufpos);
+		i++, numChars++;
+	}
+	free(str);
+	return (numChars);
+}

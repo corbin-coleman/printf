@@ -20,8 +20,7 @@ int print_o(va_list args, char buffer[], int *buflen, int *bufpos)
 	n = va_arg(args, unsigned int);
 	octal = octConverter(n);
 	if (octal == NULL)
-		octal = "(nil)";
-
+		return (0);
 	i = numChars = 0;
 	while (octal[i] != '\0')
 	{
@@ -54,7 +53,7 @@ int print_hex(va_list args, char buffer[], int *buflen, int *bufpos)
 	n = va_arg(args, unsigned int);
 	hex = hexConverter('x', n);
 	if (hex == NULL)
-		hex = "(nil)";
+		return (0);
 	i = numChars = 0;
 	while (hex[i] != '\0')
 	{
@@ -87,7 +86,7 @@ int print_heX(va_list args, char buffer[], int *buflen, int *bufpos)
 	n = va_arg(args, unsigned int);
 	heX = hexConverter('X', n);
 	if (heX == NULL)
-		heX = "(nil)";
+		return (0);
 	i = numChars = 0;
 	while (heX[i] != '\0')
 	{
@@ -120,7 +119,7 @@ int print_b(va_list args, char buffer[], int *buflen, int *bufpos)
 	n = va_arg(args, unsigned int);
 	bin = binConverter(n);
 	if (bin == NULL)
-		bin = "(nil)";
+		return (0);
 	i = numChars = 0;
 	while (bin[i] != '\0')
 	{
@@ -161,18 +160,18 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 		*bufpos += 1;
 		*buflen += 1;
 		if (*buflen == 1024)
-                        write_buffer(buffer, buflen, bufpos);
+			write_buffer(buffer, buflen, bufpos);
 		buffer[*bufpos] = '0';
 		*bufpos += 1;
 		*buflen += 1;
 		if (*buflen == 1024)
-                        write_buffer(buffer, buflen, bufpos);
+			write_buffer(buffer, buflen, bufpos);
 		buffer[*bufpos] = '0';
 		*bufpos += 1;
 		*buflen += 1;
 		if (*buflen == 1024)
-                        write_buffer(buffer, buflen, bufpos);
-		return(4);
+			write_buffer(buffer, buflen, bufpos);
+		return (4);
 	}
 	i = numChars = 0;
 	while (str[i] != '\0')
@@ -209,6 +208,8 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 			else if ((j > 16 && j < 32) || j >= 127)
 			{
 				inHex = hexConverter('X', j);
+				if (inHex == NULL)
+					return (0);
 				k = 0;
 				while (inHex[k] != '\0')
 				{
@@ -220,6 +221,7 @@ int print_S(va_list args, char buffer[], int *buflen, int *bufpos)
 							     bufpos);
 					k++;
 				}
+				free(inHex);
 			}
 			numChars += 4;
 		}

@@ -51,7 +51,7 @@ int check_conversion(char formatter, char_funcs_t conversions[], char buffer[],
 	int j, chars;
 
 	chars = 0;
-	for (j = 0; j < 12; j++)
+	for (j = 0; j < 13; j++)
 	{
 		if (formatter == *conversions[j].c)
 		{
@@ -94,6 +94,8 @@ void init_struct(char_funcs_t conversions[])
 	conversions[10].f = print_r;
 	conversions[11].c = "R";
 	conversions[11].f = print_R;
+	conversions[12].c = "p";
+	conversions[12].f = print_p;
 }
 
 /**
@@ -104,7 +106,7 @@ void init_struct(char_funcs_t conversions[])
 int _printf(const char *format, ...)
 {
 	va_list print_this;
-	char_funcs_t conversions[12];
+	char_funcs_t conversions[13];
 	char buffer[1024];
 	int i, chars, buflen, bufpos, *buflenptr, *bufposptr, print;
 
