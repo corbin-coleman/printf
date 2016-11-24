@@ -112,7 +112,7 @@ int _printf(const char *format, ...)
 {
 	va_list print_this;
 	char buffer[1024];
-	int i, chars, buflen, bufpos, *buflenptr, *bufposptr;
+	int chars, buflen, bufpos, *buflenptr, *bufposptr;
 	char_funcs_t conversions[] = {{"c", print_c},
 				      {"s", print_s},
 				      {"i", print_int},
@@ -129,7 +129,7 @@ int _printf(const char *format, ...)
 	};
 
 	initialize_buffer(buffer);
-	i = chars = bufpos = 0;
+	chars = bufpos = 0;
 	buflen = 1;
 	buflenptr = &buflen;
 	bufposptr = &bufpos;
